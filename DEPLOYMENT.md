@@ -16,24 +16,24 @@
 
 ## Service
 
-| Mục         | Nội dung                                                        |
-| ----------- | --------------------------------------------------------------- |
-| Public URL  | https://day12-agent-s8xl.onrender.com                           |
-| Platform    | Render                                                          |
-| Ngày deploy | 10/08/2026                                                      |
+| Mục         | Nội dung                              |
+| ----------- | ------------------------------------- |
+| Public URL  | https://day12-agent-s8xl.onrender.com |
+| Platform    | Render                                |
+| Ngày deploy | 10/08/2026                            |
 
 ## Biến Môi Trường Đã Set Trên Cloud
 
 Ghi tên biến và **nguồn giá trị**, không ghi giá trị:
 
-| Biến                    | Đã set | Ghi chú                                           |
-| ----------------------- | ------ | ------------------------------------------------- |
-| `PORT`                  | ✅     | platform tự gán (10000)                           |
-| `AGENT_API_KEY`         | ✅     | đặt trong dashboard, không nằm trong repo         |
-| `REDIS_URL`             | ✅     | Render Redis Internal Connection String           |
-| `RATE_LIMIT_PER_MINUTE` | ✅     | 10                                                |
-| `MONTHLY_BUDGET_USD`    | ✅     | 10.0                                              |
-| `LOG_LEVEL`             | ✅     | INFO                                              |
+| Biến                    | Đã set | Ghi chú                                   |
+| ----------------------- | ------ | ----------------------------------------- |
+| `PORT`                  | ✅     | platform tự gán (10000)                   |
+| `AGENT_API_KEY`         | ✅     | đặt trong dashboard, không nằm trong repo |
+| `REDIS_URL`             | ✅     | Render Redis Internal Connection String   |
+| `RATE_LIMIT_PER_MINUTE` | ✅     | 10                                        |
+| `MONTHLY_BUDGET_USD`    | ✅     | 10.0                                      |
+| `LOG_LEVEL`             | ✅     | INFO                                      |
 
 ## Lệnh Kiểm Tra
 
@@ -87,10 +87,24 @@ HTTP/1.1 401 Unauthorized
 
 # 4. POST /ask (Có API key)
 HTTP/1.1 200 OK
-{"answer":"Ngắn gọn: Deploy la gi phụ thuộc vào ba yếu tố — cấu hình qua biến môi trường...","user_id":"sv-test","history_length":2,"cost_usd":0.00003465,"tokens":{"in":43,"out":47}}
+{"answer":"Ngắn gọn: Deploy la gi phụ thuộc vào ba yếu tố — cấu hình qua biến môi trường, health check để orchestrator biết trạng thái, và giới hạn tài nguyên. (Mình đang nhớ 20 lượt trao đổi trước đó.)","user_id":"sv-test","history_length":20,"cost_usd":0.0001026,"tokens":{"in":496,"out":47}}
 
 # 5. Rate limit loop (15 lần)
-200 200 200 200 200 200 200 200 200 200 429 429 429 429 429
+Request 1: 200
+Request 2: 200
+Request 3: 200
+Request 4: 200
+Request 5: 200
+Request 6: 200
+Request 7: 200
+Request 8: 200
+Request 9: 200
+Request 10: 200
+Request 11: 429
+Request 12: 429
+Request 13: 429
+Request 14: 429
+Request 15: 429
 ```
 
 ## Ảnh Chụp Màn Hình
@@ -99,4 +113,3 @@ HTTP/1.1 200 OK
 
 - `screenshots/dashboard.png` — trang quản lý service trên platform
 - `screenshots/health.png` — kết quả gọi `/health` từ trình duyệt hoặc curl
-
