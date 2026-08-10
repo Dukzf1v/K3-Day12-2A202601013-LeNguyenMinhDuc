@@ -73,14 +73,24 @@ done; echo
 Dán output của các lệnh trên vào đây:
 
 ```
+# 1. GET /health
 HTTP/1.1 200 OK
 {"status":"ok","service":"day12-agent","version":"1.0.0"}
 
+# 2. GET /ready
 HTTP/1.1 200 OK
 {"status":"ready","redis":true}
 
+# 3. POST /ask (Không có API key)
 HTTP/1.1 401 Unauthorized
 {"detail":"invalid or missing API key"}
+
+# 4. POST /ask (Có API key)
+HTTP/1.1 200 OK
+{"answer":"Ngắn gọn: Deploy la gi phụ thuộc vào ba yếu tố — cấu hình qua biến môi trường...","user_id":"sv-test","history_length":2,"cost_usd":0.00003465,"tokens":{"in":43,"out":47}}
+
+# 5. Rate limit loop (15 lần)
+200 200 200 200 200 200 200 200 200 200 429 429 429 429 429
 ```
 
 ## Ảnh Chụp Màn Hình
